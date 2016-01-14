@@ -4,7 +4,7 @@ public class ProxyAccess implements Query {
 
 	private RealAccess connection = null;
 
-	public ProxyAccess(String user, String pass) {
+	public ProxyAccess() {
 
 	}
 
