@@ -14,13 +14,31 @@ public class Blog {
 	}
 
 	public void postEntry(Entry entry) {
-		entrys.add(entry);
+		entrys.add(0, entry);
 		totalEntrys = totalEntrys + 1;
 	}
 
-	public void deleteEntry(Entry entry) {
-		entrys.remove(entry);
-		totalEntrys = totalEntrys - 1;
+	public void deleteEntry(Entry entry) throws InvalidInputException {
+		if (entrys.contains(entry) == false){
+			throw new InvalidInputException ("That entry do not belong to the blog");
+		}else{
+			entrys.remove(entry);
+			totalEntrys = totalEntrys - 1;
+		}
+	}
+
+	public ArrayList<Entry> getTenMostRecentEntries() {
+		ArrayList<Entry> recentTen = new ArrayList<Entry>();
+		if (this.totalEntrys() < 10) {
+			for (int i = 0; i < this.totalEntrys(); i++) {
+				recentTen.add(entrys.get(i));
+			}
+		} else {
+			for (int i = 0; i <= 9; i++) {
+				recentTen.add(entrys.get(i));
+			}
+		}
+		return recentTen;
 	}
 
 	public int totalEntrys() {
