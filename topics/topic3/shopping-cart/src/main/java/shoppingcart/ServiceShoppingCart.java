@@ -1,9 +1,9 @@
 package shoppingcart;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ServiceShoppingCart {
-	ArrayList<Product> getCartProducts();
+	List<Product> getCartProducts();
 
 	void addProdcut(Product productToAdd);
 

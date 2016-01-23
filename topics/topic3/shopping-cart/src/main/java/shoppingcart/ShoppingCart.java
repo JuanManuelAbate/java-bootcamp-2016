@@ -1,26 +1,27 @@
 package shoppingcart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCart implements ServiceShoppingCart {
 
-	private ArrayList<Product> cartProducts;
-	int totalProducts;
+	private List<Product> cartProducts;
 
 	public ShoppingCart() {
 		this.cartProducts = new ArrayList<Product>();
-		this.totalProducts = 0;
 	}
 
 	@Override
-	public ArrayList<Product> getCartProducts() {
+	public List<Product> getCartProducts() {
 		return cartProducts;
 	}
 
 	@Override
 	public void addProdcut(Product productToAdd) {
-		cartProducts.add(productToAdd);
-		totalProducts = totalProducts + 1;
+		if (cartProducts.contains(productToAdd) == true) {
+			cartProducts.remove(productToAdd);
+		}
+		cartProducts.add(0, productToAdd);
 
 	}
 
@@ -30,13 +31,17 @@ public class ShoppingCart implements ServiceShoppingCart {
 			throw new InvalidInputException("That entry dos not belong to the blog");
 		} else {
 			cartProducts.remove(productToDelete);
-			totalProducts = totalProducts - 1;
+
 		}
 
 	}
-	
-	public int totalProducts(){
-		return this.totalProducts;
+
+	public int totalProducts() {
+		return this.cartProducts.size();
+	}
+
+	public Product getTopProduct() {
+		return this.cartProducts.get(0);
 	}
 
 }

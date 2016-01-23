@@ -1,6 +1,6 @@
 package shoppingcart;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceShoppingCartWebServiceClient implements ServiceShoppingCart {
 
@@ -12,7 +12,7 @@ public class ServiceShoppingCartWebServiceClient implements ServiceShoppingCart 
 	}
 
 	@Override
-	public ArrayList<Product> getCartProducts() {
+	public List<Product> getCartProducts() {
 		return webService.getCartProducts();
 	}
 
