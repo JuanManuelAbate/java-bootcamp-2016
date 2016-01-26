@@ -19,7 +19,7 @@ public class DbConnection {
 			e.printStackTrace();
 		}
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/high-school", "jabate", "juansete");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/high-school", "jabate", "pass");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
