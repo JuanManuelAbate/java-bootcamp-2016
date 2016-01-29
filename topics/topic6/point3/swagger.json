@@ -1,0 +1,329 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "PoC of a REST api, User",
+        "version": "1.0",
+        "title": "User REST api",
+        "contact": {
+            "name": "juan.abate@gmail.com"
+        },
+        "license": {
+            "name": "Apache License Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "user-controller",
+            "description": "Users API"
+        }
+    ],
+    "paths": {
+        "/api/infos/api/user/add": {
+            "post": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "Add an User",
+                "description": "Add new user",
+                "operationId": "addUserUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "newUser",
+                        "description": "newUser",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull User Added",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Impossible to add User"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/infos/api/user/delete/{userName}": {
+            "delete": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "Delete an User",
+                "description": "Delete an spesific user by Username",
+                "operationId": "deleteUserUsingDELETE",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "path",
+                        "description": "userName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull User Delete",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Impossible to delete User"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/infos/api/user/findbyname/{name}": {
+            "get": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "Get Users by Name",
+                "description": "Returns all users with specific Name",
+                "operationId": "findByNameUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returned existing users",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/infos/api/user/findbyusername/{userName}": {
+            "get": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "Get user by Username",
+                "description": "Return an User with specific Username",
+                "operationId": "findByUserNameUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "path",
+                        "description": "userName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returned existing user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Imposible to return user"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/infos/api/user/update": {
+            "put": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "Update an User",
+                "description": "Update an spesific user by Username",
+                "operationId": "updateUserUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "updateUser",
+                        "description": "updateUser",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfull User Updated",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Impossible to update User"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/infos/api/users": {
+            "get": {
+                "tags": [
+                    "user-controller"
+                ],
+                "summary": "Get Users",
+                "description": "Returns all users",
+                "operationId": "getAllUsersUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returned existing users",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "name",
+                "password",
+                "userName"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the User"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password of the User"
+                },
+                "userName": {
+                    "type": "string",
+                    "description": "Username of the User"
+                }
+            },
+            "description": "User Information"
+        }
+    }
+}
