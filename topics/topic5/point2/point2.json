@@ -1,0 +1,12 @@
+use high-school
+
+db.student.find({enrolled_courses:
+			{$elemMatch:{
+				course_name:"course1",
+				final_note: {$gte:4}
+				    }
+			}
+		}).pretty()
+
+
+

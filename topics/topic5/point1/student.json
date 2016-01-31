@@ -1,0 +1,50 @@
+use high-school
+
+db.student.insert({
+	first_name: "student1",
+	last_name: "student1",
+	birth_date: "01/01/2000",
+	enrolled_courses: [
+				{
+				course_name: "course1",
+				final_note: 1
+				},
+				{
+				course_name: "course2",
+				final_note: 4
+				}
+			   ]})
+
+db.student.insert({
+	first_name: "student2",
+	last_name: "student2",
+	birth_date: "02/02/2000",
+	enrolled_courses: [
+				{
+				course_name: "course3",
+				final_note: 10
+				},
+				{
+				course_name: "course2",
+				final_note: 1
+				}
+			   ]})
+
+db.student.insert({
+	first_name: "student3",
+	last_name: "student3",
+	birth_date: "03/03/2000",
+	enrolled_courses: [
+				{
+				course_name: "course1",
+				final_note: 10
+				},
+				{
+				course_name: "course2",
+				final_note: 10
+				},
+				{
+				course_name: "course3",
+				final_note: 10
+				}
+			   ]})

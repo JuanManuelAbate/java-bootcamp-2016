@@ -1,0 +1,16 @@
+use high-school
+
+db.teacher.insert({
+	first_name: "teacher1",
+	last_name: "teacher1",
+	birth_date: "01/01/1990"})
+
+db.teacher.insert({
+	first_name: "teacher2",
+	last_name: "teacher2",
+	birth_date: "02/02/1990"})
+
+db.teacher.insert({
+	first_name: "teacher3", 
+	last_name: "teacher3", 
+	birth_date: "03/03/1990"})
