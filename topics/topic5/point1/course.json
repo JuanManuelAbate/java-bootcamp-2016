@@ -1,0 +1,49 @@
+use high-school
+
+db.course.insert({
+	name: "course1",
+	assigned_teacher: "teacher1",
+	scheduler: [
+			{
+			begin: "10:00 hs",
+			end: "11:00 hs",
+			day: "Monday"
+			}
+		   ]})	
+
+db.course.insert({
+	name: "course2",
+	assigned_teacher: "teacher2",
+	scheduler: [
+			{
+			begin: "10:00 hs",
+			end: "11:00 hs",
+			day: "Tuesday"
+			},
+			{
+			begin: "11:00 hs",
+			end: "12:00 hs",
+			day: "Friday"
+			},
+		   ]})	
+
+db.course.insert({
+	name: "course3",
+	assigned_teacher: "teacher3",
+	scheduler: [
+			{
+			begin: "10:00 hs",
+			end: "11:00 hs",
+			day: "Wednesday"
+			},
+			{
+			begin: "11:00 hs",
+			end: "12:00 hs",
+			day: "Thursday"
+			},
+			{
+			begin: "15:00 hs",
+			end: "16:00 hs",
+			day: "Monday"
+			},
+		   ]})	
