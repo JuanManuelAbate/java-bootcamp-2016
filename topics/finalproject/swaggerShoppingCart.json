@@ -1,0 +1,621 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "ShoppingCart REST api",
+        "version": "1.0",
+        "title": "ShoppingCart",
+        "contact": {
+            "name": "juan.abate@gmail.com"
+        },
+        "license": {
+            "name": "Apache License Version 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "shopping-cart-controller",
+            "description": "ShoppingCart API"
+        }
+    ],
+    "paths": {
+        "/shoppingCart/cart/addProduct": {
+            "post": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Add product to cart",
+                "description": "Add a product to cart that can be buyed or saved later",
+                "operationId": "addProductToCartUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "newProduct",
+                        "description": "newProduct",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product added",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "That product doesn't exist"
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/cart/allProducts": {
+            "get": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "All products in cart",
+                "description": "Get all products in cart for a logged user",
+                "operationId": "getAllProductsInCarUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/cart/buy": {
+            "put": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Buy",
+                "description": "Buy products in cart and update stock",
+                "operationId": "buyCartProductsUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Purchase completed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "406": {
+                        "description": "Impossible to buy , check quantities"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/cart/removeProduct": {
+            "delete": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Remove product of cart",
+                "description": "Remove a spesific product from cart",
+                "operationId": "deleteProductInCarUsingDELETE",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "removeProduct",
+                        "description": "removeProduct",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product removed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/cart/save": {
+            "post": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Save",
+                "description": "Save user cart",
+                "operationId": "saveCartUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cart Saved",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/cart/totalPrice": {
+            "get": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Cart total",
+                "description": "Get the total amount of cart",
+                "operationId": "getTotalPriceUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Amount of cart",
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/cart/updateProduct": {
+            "put": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Update product of cart",
+                "description": "Update a product in cart",
+                "operationId": "UpdateProductInCarUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "updateProduct",
+                        "description": "updateProduct",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "You need to be logged"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/login/{userName}/{password}": {
+            "put": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Login",
+                "description": "Login as a register user",
+                "operationId": "loginUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "path",
+                        "description": "userName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "path",
+                        "description": "password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logged as userName",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "406": {
+                        "description": "A user is currently logged"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/logout": {
+            "put": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Logout",
+                "description": "Logout",
+                "operationId": "logoutUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/product/allProducts": {
+            "get": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Show products",
+                "description": "Show all products in store",
+                "operationId": "getAllProductsUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/product/productsByCategory/{category}": {
+            "get": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "List products by category",
+                "description": "Find and list all products that meet a category",
+                "operationId": "getProductsByCategoryUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "category",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/product/productsByName/{name}": {
+            "get": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "List products by name",
+                "description": "Find and list all products that meet a name",
+                "operationId": "getProductsByNameUsingGET",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of products",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/shoppingCart/user/newUser": {
+            "post": {
+                "tags": [
+                    "shopping-cart-controller"
+                ],
+                "summary": "Add an user",
+                "description": "Register a new user to the system",
+                "operationId": "newUserUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "newUser",
+                        "description": "newUser",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "User created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "406": {
+                        "description": "Username already used"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
+        },
+        "Product": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        }
+    }
+}
